@@ -1,11 +1,31 @@
+# Establishing Azure Variables
+variable "client_id" {
+  type    = string
+  default = "${env("CLIENT_ID")}"
+  sensitive = true
+}
+
+variable "client_secret" {
+  type    = string
+  default = "${env("CLIENT_SECRET")}"
+  sensitive = true
+}
+
+variable "subscription_id" {
+  type    = string
+  default = "${env("SUBSCRIPTION_ID")}"
+  sensitive = true
+}
+
+# Azure Source Information
 source "azure-arm" "ubuntu-2004" {
   azure_tags = {
     dept = "Solution Engineering"
     task = "GitHub Packer Demo"
   }
-  client_id                         = "${env("CLIENT_ID")}"
-  client_secret                     = "${env("CLIENT_SECRET")}"
-  subscription_id                   = "${env("SUBSCRIPTION_ID")}"
+  client_id                         = "${var.client_id}"
+  client_secret                     = "${var.client_secret}"
+  subscription_id                   = "${var.subscription_id}"
   image_offer                       = "UbuntuServer"
   image_publisher                   = "Canonical"
   image_sku                         = "20.04-LTS"
