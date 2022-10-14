@@ -2,19 +2,19 @@
 variable "client_id" {
   type    = string
   default = "${env("CLIENT_ID")}"
-  sensitive = true
+  sensitive = false
 }
 
 variable "client_secret" {
   type    = string
   default = "${env("CLIENT_SECRET")}"
-  sensitive = true
+  sensitive = false
 }
 
 variable "subscription_id" {
   type    = string
   default = "${env("SUBSCRIPTION_ID")}"
-  sensitive = true
+  sensitive = false
 }
 
 # Azure Source Information
