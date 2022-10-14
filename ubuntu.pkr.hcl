@@ -12,7 +12,6 @@ source "azure-arm" "ubuntu-2004" {
   managed_image_name                = "oeghaneyan-ubuntu-2004"
   managed_image_resource_group_name = "oeghaneyan-demos"
   os_type                           = "Linux"
-  subscription_id                   = "$SUBSCRIPTION_ID"
   vm_size                           = "Standard_DS2_v2"
 }
 
