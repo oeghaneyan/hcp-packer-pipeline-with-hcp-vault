@@ -26,13 +26,13 @@ jobs:
        #Temp Step Below   
        
       - name: Check Subscription
-        run: echo "sub id - $SUBSCRIPTION_ID"
+        run: echo "sub id - ${{ env.SUBSCRIPTION_ID }}"
   
       - name: Check Client ID
-        run: echo "sub id - $CLIENT_ID"
+        run: echo "client id - ${{ env.CLIENT_ID }}"
 
       - name: Check Client Secret
-        run: echo "sub id - $CLIENT_SECRET"
+        run: echo "client secret - ${{ env.CLIENT_SECRET }}"
           
        #Temp Step Above   
             
