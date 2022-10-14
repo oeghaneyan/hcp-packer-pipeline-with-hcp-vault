@@ -35,10 +35,10 @@ source "azure-arm" "ubuntu-2004" {
   tenant_id                         = "${var.tenant_id}"
   image_offer                       = "UbuntuServer"
   image_publisher                   = "Canonical"
-  image_sku                         = "20.04-LTS"
+  image_sku                         = "16.04-LTS"
   location                          = "East US"
-  managed_image_name                = "oeghaneyan-ubuntu-2004"
-  managed_image_resource_group_name = "oeghaneyan-demos"
+  managed_image_name                = "myPackerImage"
+  managed_image_resource_group_name = "myResourceGroup"
   os_type                           = "Linux"
   vm_size                           = "Standard_DS2_v2"
 }
