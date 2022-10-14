@@ -3,9 +3,6 @@ source "azure-arm" "ubuntu-2004" {
     dept = "Solution Engineering"
     task = "GitHub Packer Demo"
   }
-  subscription_id                   = "$SUBSCRIPTION_ID"
-  client_id                         = "$CLIENT_ID"
-  client_secret                     = "$CLIENT_SECRET"
   image_offer                       = "UbuntuServer"
   image_publisher                   = "Canonical"
   image_sku                         = "20.04-LTS"
