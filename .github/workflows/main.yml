@@ -21,6 +21,7 @@ jobs:
           secrets: |
             azure/creds/github-app client_id | CLIENT_ID ;
             azure/creds/github-app client_secret | CLIENT_SECRET ;
+            hcp/packer/github-sp AZURE_SUBSCRIPTION_ID | SUBSCRIPTION_ID
             
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -44,8 +45,5 @@ jobs:
           PACKER_LOG: 1
           HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
           HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
-          SUBSCRIPTION_ID: ${{ secrets.SUBSCRIPTION_ID }}
-          CLIENT_ID: $CLIENT_ID
-          CLIENT_SECRET: $CLIENT_SECRET
 
       # additional steps to process artifacts
