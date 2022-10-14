@@ -45,5 +45,8 @@ jobs:
           PACKER_LOG: 1
           HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
           HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
+          SUBSCRIPTION_ID: $SUBSCRIPTION_ID
+          CLIENT_ID: $CLIENT_ID
+          CLIENT_SECRET: $CLIENT_SECRET
 
       # additional steps to process artifacts
