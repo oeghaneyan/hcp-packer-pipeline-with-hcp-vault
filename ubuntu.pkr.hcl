@@ -29,7 +29,7 @@ variable "tenant_id" {
 }
 
 # Azure Source Information
-source "azure-arm" "ubuntu-2004" {
+source "azure-arm" "ubuntu-1804" {
   azure_tags = {
     dept = "Solution Engineering"
     task = "GitHub Packer Demo"
@@ -40,16 +40,16 @@ source "azure-arm" "ubuntu-2004" {
   tenant_id                         = "${var.tenant_id}"
   image_offer                       = "UbuntuServer"
   image_publisher                   = "Canonical"
-  image_sku                         = "16.04-LTS"
+  image_sku                         = "18.04-LTS"
   location                          = "East US"
-  managed_image_name                = "ubuntu-1604-${local.timestamp}
+  managed_image_name                = "ubuntu-2004-${local.timestamp}"
   managed_image_resource_group_name = "oeghaneyan-demos"
   os_type                           = "Linux"
   vm_size                           = "Standard_DS2_v2"
 }
 
 build {
-  sources = ["source.azure-arm.ubuntu-2004"]
+  sources = ["source.azure-arm.ubuntu-1804"]
 
   provisioner "shell" {
     execute_command = "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'"
