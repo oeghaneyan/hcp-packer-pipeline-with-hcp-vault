@@ -21,7 +21,6 @@ jobs:
           secrets: |
             azure/creds/github-app client_id | CLIENT_ID ;
             azure/creds/github-app client_secret | CLIENT_SECRET ;
-            hcp/packer/github-sp azure_subscription_id | SUBSCRIPTION_ID;
             
       - name: Checkout Repository
         uses: actions/checkout@v2
