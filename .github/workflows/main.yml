@@ -31,7 +31,7 @@ jobs:
         with:
           command: validate
           arguments: -syntax-only
-          target: packer.pkr.hcl
+          target: ubuntu.pkr.hcl
 
       # build artifact
       - name: Build Artifact
@@ -39,7 +39,7 @@ jobs:
         with:
           command: build
           arguments: "-color=false -on-error=abort"
-          target: packer.pkr.hcl
+          target: ubuntu.pkr.hcl
           working_directory: infrastructure/packer
         env:
           PACKER_LOG: 1
