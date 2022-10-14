@@ -32,6 +32,7 @@ source "azure-arm" "ubuntu-2004" {
   client_id                         = "${var.client_id}"
   client_secret                     = "${var.client_secret}"
   subscription_id                   = "${var.subscription_id}"
+  tenant_id                         = "${var.tenant_id}"
   image_offer                       = "UbuntuServer"
   image_publisher                   = "Canonical"
   image_sku                         = "16.04-LTS"
