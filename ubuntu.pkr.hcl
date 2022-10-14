@@ -17,6 +17,12 @@ variable "subscription_id" {
   sensitive = false
 }
 
+variable "tenant_id" {
+  type    = string
+  default = "${env("TENANT_ID")}"
+  sensitive = false
+}
+
 # Azure Source Information
 source "azure-arm" "ubuntu-2004" {
   azure_tags = {
