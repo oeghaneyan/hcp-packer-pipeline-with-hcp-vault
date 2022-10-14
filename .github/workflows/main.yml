@@ -20,17 +20,11 @@ jobs:
           namespace: admin
           secrets: |
             azure/creds/github-app client_id | CLIENT_ID ;
-            azure/creds/github-app client_secret | CLIENT_SECRET ;
+            azure/creds/github-app client_secret | CLIENT_SECRET ; 
             
       - name: Checkout Repository
         uses: actions/checkout@v2
-
-      # fix backwards incompatibilities in template
-      - name: Fix Template
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: fix
-
+        
       # validate templates
       - name: Validate Template
         uses: hashicorp/packer-github-actions@master
