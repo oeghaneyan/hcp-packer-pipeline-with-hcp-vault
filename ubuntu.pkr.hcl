@@ -42,7 +42,7 @@ source "azure-arm" "ubuntu-2004" {
   image_publisher                   = "Canonical"
   image_sku                         = "16.04-LTS"
   location                          = "East US"
-  managed_image_name                = "ubuntu-1604-${local.timestamp}"
+  managed_image_name                = "ubuntu-1604-${local.timestamp}
   managed_image_resource_group_name = "oeghaneyan-demos"
   os_type                           = "Linux"
   vm_size                           = "Standard_DS2_v2"
