@@ -22,6 +22,7 @@ jobs:
             azure/creds/github-app client_id | CLIENT_ID ;
             azure/creds/github-app client_secret | CLIENT_SECRET ;
             hcp/data/packer/github-sp AZURE_SUBSCRIPTION_ID | SUBSCRIPTION_ID
+            hcp/data/packer/github-sp TENANT_ID | TENANT_ID
           
        #Temp Step Below   
        
