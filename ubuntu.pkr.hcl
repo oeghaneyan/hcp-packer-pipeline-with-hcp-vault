@@ -45,7 +45,6 @@ source "azure-arm" "ubuntu-1804" {
   managed_image_name                = "ubuntu-1804-${local.timestamp}"
   build_resource_group_name         = "oeghaneyan-demos"
   managed_image_resource_group_name = "oeghaneyan-demos"
-  storage_account                   = "oeghaneyan"
   os_type                           = "Linux"
   vm_size                           = "Standard_DS2_v2"
 }
