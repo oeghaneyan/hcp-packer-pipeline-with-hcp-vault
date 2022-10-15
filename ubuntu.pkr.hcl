@@ -42,7 +42,7 @@ source "azure-arm" "ubuntu-1804" {
   image_publisher                   = "Canonical"
   image_sku                         = "18.04-LTS"
   capture_name_prefix               = "packer"
-  capture_container_name            = "ubuntu-1804-${local.timestamp}"
+  managed_image_name                = "ubuntu-1804-${local.timestamp}"
   build_resource_group_name         = "oeghaneyan-demos"
   resource_group_name               = "oeghaneyan-demos"
   storage_account                   = "oeghaneyan"
