@@ -1,14 +1,22 @@
 ---
 
-name: Packer Build
+name: Build and Deploy Image
 
 on:
   push:
+    tags: ["v[0-9].[0-9]+.[0-9]+"]
+    branches:
+      - "development"
+      - "staging"
+      - "main"
 
 jobs:
-  packer:
+  build-image:
+    name: Build
     runs-on: ubuntu-latest
-    name: packer
+    outputs:
+      iteration_id: ${{ steps.hcp.outputs.iteration_id }}
+      
     steps:
       - name: Import Secrets
         uses: hashicorp/vault-action@v2.4.0
@@ -27,24 +35,35 @@ jobs:
             hcp/data/packer/github-sp HCP_CLIENT_SECRET | HCP_CLIENT_SECRET
             
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         
       # validate templates
-      - name: Validate Template
+      - name: Validate Packer Syntax
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
           arguments: -syntax-only
           target: ubuntu.pkr.hcl
 
+      - name: Packer Init
+        run: packer init .
+        
+      - name: Packer Build - Branches
+        if: "startsWith(github.ref, 'refs/heads/')"
+        run: packer build .
+
+      - name: Packer Build - Tags
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: HCP_PACKER_BUILD_FINGERPRINT=$(date +'%m%d%YT%H%M%S') packer build .
+
       # build artifact
-      - name: Build Image
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: build
-          arguments: "-color=false -on-error=abort"
-          target: ubuntu.pkr.hcl
-        env:
-          PACKER_LOG: 1
+#      - name: Build Image
+#        uses: hashicorp/packer-github-actions@master
+#        with:
+#          command: build
+#          arguments: "-color=false -on-error=abort"
+#          target: ubuntu.pkr.hcl
+#        env:
+#          PACKER_LOG: 1
 
       # additional steps to process artifacts
