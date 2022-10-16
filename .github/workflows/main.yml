@@ -13,7 +13,7 @@ jobs:
       - name: Import Secrets
         uses: hashicorp/vault-action@v2.4.0
         with:
-          url: https://vault-public-vault-08c44092.b76a1ca6.z1.hashicorp.cloud:8200/
+          url: https://vault-public-vault-08c44092.b76a1ca6.z1.hashicorp.cloud:8200
           method: approle
           roleId: ${{ secrets.VAULT_ROLE_ID }}
           secretId: ${{ secrets.VAULT_SECRET_ID }}
@@ -22,9 +22,7 @@ jobs:
             azure/creds/github-app client_id | CLIENT_ID ;
             azure/creds/github-app client_secret | CLIENT_SECRET ;
             hcp/data/packer/github-sp AZURE_SUBSCRIPTION_ID | SUBSCRIPTION_ID ;
-            hcp/data/packer/github-sp TENANT_ID | TENANT_ID ;
-            hcp/data/packer/github-sp HCP_CLIENT_ID | HCP_CLIENT_ID ;
-            hcp/data/packer/github-sp HCP_CLIENT_SECRET | HCP_CLIENT_SECRET
+            hcp/data/packer/github-sp TENANT_ID | TENANT_ID 
             
       - name: Checkout Repository
         uses: actions/checkout@v2
