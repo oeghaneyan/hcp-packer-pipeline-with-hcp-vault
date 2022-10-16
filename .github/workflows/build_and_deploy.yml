@@ -10,6 +10,9 @@ on:
       - "staging"
       - "main"
 
+env:
+  HCP_BUCKET_NAME: "ubuntu-image"
+
 jobs:
   build-image:
     name: Build
@@ -30,10 +33,12 @@ jobs:
             azure/creds/github-app client_id | CLIENT_ID ;
             azure/creds/github-app client_secret | CLIENT_SECRET ;
             hcp/data/packer/github-sp AZURE_SUBSCRIPTION_ID | SUBSCRIPTION_ID ;
-            hcp/data/packer/github-sp TENANT_ID | TENANT_ID ;
+            hcp/data/packer/github-sp AZURE_TENANT_ID | TENANT_ID ;
+            hcp/data/packer/github-sp HCP_PROJECT_ID | HCP_PROJECT_ID ;            
+            hcp/data/packer/github-sp HCP_ORGANIZATION_ID | HCP_ORGANIZATION_ID ;            
             hcp/data/packer/github-sp HCP_CLIENT_ID | HCP_CLIENT_ID ;
             hcp/data/packer/github-sp HCP_CLIENT_SECRET | HCP_CLIENT_SECRET
-            
+                        
       - name: Checkout Repository
         uses: actions/checkout@v3
         
@@ -55,15 +60,25 @@ jobs:
       - name: Packer Build - Tags
         if: startsWith(github.ref, 'refs/tags/v')
         run: HCP_PACKER_BUILD_FINGERPRINT=$(date +'%m%d%YT%H%M%S') packer build .
+        
+      - name: Get HCP Packer Iteration ID from Packer Manifest
+        id: hcp
+        run: |
+          last_run_uuid=$(jq -r '.last_run_uuid' "./packer_manifest.json")
+          build=$(jq -r '.builds[] | select(.packer_run_uuid == "'"$last_run_uuid"'")' "./packer_manifest.json")
+          iteration_id=$(echo "$build" | jq -r '.custom_data.iteration_id')
+          echo "::set-output name=iteration_id::$iteration_id"
+          
+  update-hcp-packer-channel:
+    name: Update HCP Packer channel
+    needs: ["build-image"]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-      # build artifact
-#      - name: Build Image
-#        uses: hashicorp/packer-github-actions@master
-#        with:
-#          command: build
-#          arguments: "-color=false -on-error=abort"
-#          target: ubuntu.pkr.hcl
-#        env:
-#          PACKER_LOG: 1
-
-      # additional steps to process artifacts
+      - name: Create and set channel
+        working-directory: .github/scripts
+        run: |
+          channel_name=$( echo ${{github.ref_name}} | sed 's/\./-/g')
+          ./create_channel_iteration.sh $HCP_BUCKET_NAME $channel_name "${{ needs.build-image.outputs.iteration_id }}"
