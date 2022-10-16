@@ -38,7 +38,7 @@ jobs:
           target: ubuntu.pkr.hcl
 
       # build artifact
-      - name: Build Artifact
+      - name: Build Image
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
