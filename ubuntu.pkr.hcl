@@ -41,7 +41,7 @@ source "azure-arm" "ubuntu-1804" {
   build_resource_group_name         = "oeghaneyan-demos"
   image_offer                       = "UbuntuServer"
   image_publisher                   = "Canonical"
-  image_sku                         = "18.04-LTS"
+  image_sku                         = "20_04-daily-lts-gen2"
   managed_image_name                = "ubuntu-1804-${local.timestamp}"
   managed_image_resource_group_name = "oeghaneyan-demos"
   os_type                           = "Linux"
