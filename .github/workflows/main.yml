@@ -42,7 +42,7 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
-          arguments: "-color=false -on-error=abort"
+          arguments: "-on-error=abort"
           target: ubuntu.pkr.hcl
         env:
           PACKER_LOG: 1
