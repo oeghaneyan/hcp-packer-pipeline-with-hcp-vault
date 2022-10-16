@@ -67,5 +67,13 @@ build {
     inline          = ["apt-get update", "apt-get upgrade -y", "apt-get -y install nginx", "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"]
     inline_shebang  = "/bin/sh -x"
   }
+	  
+  post-processor "manifest" {
+    output     = "packer_manifest.json"
+    strip_path = true
+    custom_data = {
+      iteration_id = packer.iterationID
+    }
+  }	  
 
 }
