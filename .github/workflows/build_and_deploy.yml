@@ -15,7 +15,7 @@ env:
 
 jobs:
   build-image:
-    name: Build
+    name: Build Packer Image
     runs-on: ubuntu-latest
     outputs:
       iteration_id: ${{ steps.hcp.outputs.iteration_id }}
@@ -42,7 +42,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         
-      # validate templates
       - name: Validate Packer Syntax
         uses: hashicorp/packer-github-actions@master
         with:
@@ -74,6 +73,20 @@ jobs:
     needs: ["build-image"]
     runs-on: ubuntu-latest
     steps:
+      - name: Import Secrets
+        uses: hashicorp/vault-action@v2.4.0
+        with:
+          url: https://vault-public-vault-08c44092.b76a1ca6.z1.hashicorp.cloud:8200
+          method: approle
+          roleId: ${{ secrets.VAULT_ROLE_ID }}
+          secretId: ${{ secrets.VAULT_SECRET_ID }}
+          namespace: admin
+          secrets: |
+            hcp/data/packer/github-sp HCP_PROJECT_ID | HCP_PROJECT_ID ;            
+            hcp/data/packer/github-sp HCP_ORGANIZATION_ID | HCP_ORGANIZATION_ID ;            
+            hcp/data/packer/github-sp HCP_CLIENT_ID | HCP_CLIENT_ID ;
+            hcp/data/packer/github-sp HCP_CLIENT_SECRET | HCP_CLIENT_SECRET
+    
       - name: Checkout Repository
         uses: actions/checkout@v3
 
