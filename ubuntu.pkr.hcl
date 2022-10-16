@@ -49,6 +49,17 @@ source "azure-arm" "ubuntu-1804" {
 }
 
 build {
+	
+  hcp_packer_registry {
+    bucket_name = "ubuntu-image"
+    description = <<EOT
+      This is an image for Ubuntu 18.04.
+    EOT
+    bucket_labels = {
+      "os" = "ubuntu",
+    }
+  }	
+	
   sources = ["source.azure-arm.ubuntu-1804"]
 
   provisioner "shell" {
