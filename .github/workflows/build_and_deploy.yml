@@ -93,7 +93,7 @@ jobs:
       - name: Create Channel Variable
         working-directory: .github/scripts
         run: |
-          channel_name=$( echo ${{github.ref_name}} | sed 's/\./-/g')
+          export channel_name=( echo ${{github.ref_name}} | sed 's/\./-/g')
           printenv
   
       - name: Create and Set Channel
