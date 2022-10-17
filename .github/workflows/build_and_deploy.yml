@@ -90,9 +90,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Create and set channel
+      - name: Create Channel Variable
         working-directory: .github/scripts
         run: |
           channel_name=$( echo ${{github.ref_name}} | sed 's/\./-/g')
-          printenv | channel
-          ./create_channel_iteration.sh ubuntu-image $channel_name "${{ needs.build-image.outputs.iteration_id }}"
+          printenv
+  
+      - name: Create and Set Channel
+        working-directory: .github/scripts
+        run: ./create_channel_iteration.sh ubuntu-image $channel_name "${{ needs.build-image.outputs.iteration_id }}"
