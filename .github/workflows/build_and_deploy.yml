@@ -94,4 +94,5 @@ jobs:
         working-directory: .github/scripts
         run: |
           channel_name=$( echo ${{github.ref_name}} | sed 's/\./-/g')
+          printenv | channel
           ./create_channel_iteration.sh ubuntu-image $channel_name "${{ needs.build-image.outputs.iteration_id }}"
