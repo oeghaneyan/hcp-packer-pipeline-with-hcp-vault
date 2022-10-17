@@ -54,7 +54,11 @@ jobs:
         
       - name: Packer Build - Branches
         if: "startsWith(github.ref, 'refs/heads/')"
-        run: packer build .
+        uses: ubuntu-latest@master
+        with:
+          max_attempts: 3
+          retry_on: error
+          command: packer build .
 
       - name: Packer Build - Tags
         if: startsWith(github.ref, 'refs/tags/v')
@@ -92,10 +96,11 @@ jobs:
 
       - name: Create Channel Variable
         working-directory: .github/scripts
-        run: |
-          export channel_name=( echo ${{github.ref_name}} | sed 's/\./-/g')
-          printenv
+        run: echo "channel_name=$( echo ${{github.ref_name}} | sed 's/\./-/g')" >> $channel_name
+        
+      - name: Test Channel Variable
+        run: echo $channel_name
   
-      - name: Create and Set Channel
+      - name: Set Channel
         working-directory: .github/scripts
         run: ./create_channel_iteration.sh ubuntu-image $channel_name "${{ needs.build-image.outputs.iteration_id }}"
