@@ -94,4 +94,4 @@ jobs:
         working-directory: .github/scripts
         run: |
           channel_name=$( echo ${{github.ref_name}} | sed 's/\./-/g')
-          ./create_channel_iteration.sh $HCP_BUCKET_NAME $channel_name "${{ needs.build-image.outputs.iteration_id }}"
+          ./create_channel_iteration.sh ubuntu-image $channel_name "${{ needs.build-image.outputs.iteration_id }}"
