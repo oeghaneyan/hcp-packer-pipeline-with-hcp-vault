@@ -99,4 +99,4 @@ jobs:
   
       - name: Set Channel
         working-directory: .github/scripts
-        run: ./create_channel_iteration.sh ubuntu-image $channel_name "${{ needs.build-image.outputs.iteration_id }}"
+        run: ./create_channel_iteration.sh $HCP_BUCKET_NAME $channel_name "${{ needs.build-image.outputs.iteration_id }}"
