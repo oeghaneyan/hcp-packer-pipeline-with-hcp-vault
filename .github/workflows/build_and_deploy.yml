@@ -73,25 +73,30 @@ jobs:
     needs: ["build-image"]
     runs-on: ubuntu-latest
     steps:
-      - name: Import Secrets
-        uses: hashicorp/vault-action@v2.4.0
-        with:
-          url: https://vault-public-vault-08c44092.b76a1ca6.z1.hashicorp.cloud:8200
-          method: approle
-          roleId: ${{ secrets.VAULT_ROLE_ID }}
-          secretId: ${{ secrets.VAULT_SECRET_ID }}
-          namespace: admin
-          secrets: |
-            hcp/data/packer/github-sp HCP_PROJECT_ID | HCP_PROJECT_ID ;            
-            hcp/data/packer/github-sp HCP_ORGANIZATION_ID | HCP_ORGANIZATION_ID ;            
-            hcp/data/packer/github-sp HCP_CLIENT_ID | HCP_CLIENT_ID ;
-            hcp/data/packer/github-sp HCP_CLIENT_SECRET | HCP_CLIENT_SECRET
+#      - name: Import Secrets
+#        uses: hashicorp/vault-action@v2.4.0
+#        with:
+#          url: https://vault-public-vault-08c44092.b76a1ca6.z1.hashicorp.cloud:8200
+#          method: approle
+#          roleId: ${{ secrets.VAULT_ROLE_ID }}
+#          secretId: ${{ secrets.VAULT_SECRET_ID }}
+#          namespace: admin
+#          secrets: |
+#            hcp/data/packer/github-sp HCP_PROJECT_ID | HCP_PROJECT_ID ;            
+#            hcp/data/packer/github-sp HCP_ORGANIZATION_ID | HCP_ORGANIZATION_ID ;            
+#            hcp/data/packer/github-sp HCP_CLIENT_ID | HCP_CLIENT_ID ;
+#            hcp/data/packer/github-sp HCP_CLIENT_SECRET | HCP_CLIENT_SECRET
     
       - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Create and set channel
         working-directory: .github/scripts
+        env:
+          HCP_CLIENT_ID: ${{ secrets.HCP_CLIENT_ID }}
+          HCP_CLIENT_SECRET: ${{ secrets.HCP_CLIENT_SECRET }}
+          HCP_PROJECT_ID: ${{ secrets.HCP_PROJECT_ID }}
+          HCP_ORGANIZATION_ID: ${{ secrets.HCP_ORGANIZATION_ID }}
         run: |
           channel_name=$( echo ${{github.ref_name}} | sed 's/\./-/g')
           ./create_channel_iteration.sh $HCP_BUCKET_NAME $channel_name "${{ needs.build-image.outputs.iteration_id }}"
