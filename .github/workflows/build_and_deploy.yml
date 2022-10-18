@@ -91,21 +91,17 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Create Channel Variable
-        working-directory: .github/scripts
         run: echo "channel_name=$( echo ${{ github.ref_name }} | sed 's/\./-/g')" >> $GITHUB_ENV
-        
-      - name: Test Channel Variable
-        run: echo $channel_name
+      
+      - name: Iteration ID Variable
+        run: echo "iteration_id=$( echo ${{ needs.build-image.outputs.iteration_id }}" >> $GITHUB_ENV
+      
+      - name: Test Iteration ID Variable
+        run: echo $iteration_id
  
       - name: Set Channel
         run: |
         
-# Entry point
-test "$#" -eq 3 || usage
-
-bucket_slug="$1"
-channel_name="$2"
-iteration_id="$3"
 base_url="https://api.cloud.hashicorp.com/packer/2021-04-30/organizations/$HCP_ORGANIZATION_ID/projects/$HCP_PROJECT_ID"
 
 # If on main branch, set channel to release
