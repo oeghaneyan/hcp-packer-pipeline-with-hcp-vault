@@ -93,7 +93,7 @@ jobs:
       - name: Create Channel Variable
         run: echo "channel_name=$( echo ${{ github.ref_name }} | sed 's/\./-/g')" >> $GITHUB_ENV
       
-      - name: Change Script Permissions
+      - name: Set Script Permissions
         run: chmod +x .github/scripts/create_channel_iteration.sh
       
       - name: Set Channel
