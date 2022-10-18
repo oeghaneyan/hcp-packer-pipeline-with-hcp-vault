@@ -93,6 +93,9 @@ jobs:
       - name: Create Channel Variable
         run: echo "channel_name=$( echo ${{ github.ref_name }} | sed 's/\./-/g')" >> $GITHUB_ENV
       
+      - name: Change Script Permissions
+        run: chmod +x .github/scripts/create_channel_iteration.sh
+      
       - name: Set Channel
         working-directory: .github/scripts
         run: ./create_channel_iteration.sh $HCP_BUCKET_NAME $channel_name "${{ needs.build-image.outputs.iteration_id }}"
