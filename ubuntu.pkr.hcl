@@ -48,6 +48,8 @@ source "azure-arm" "ubuntu-1804" {
   vm_size                           = "Standard_DS2_v2"
 }
 
+# Build Information
+
 build {
 	
   hcp_packer_registry {
