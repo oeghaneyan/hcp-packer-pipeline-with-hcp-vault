@@ -1,3 +1,4 @@
+
 # Time stamps for image file placed into Cloud
 locals {
 	timestamp = regex_replace(timestamp(), "[- TZ:]", "")
