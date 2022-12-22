@@ -66,8 +66,6 @@ jobs:
           last_run_uuid=$(jq -r '.last_run_uuid' "./packer_manifest.json")
           build=$(jq -r '.builds[] | select(.packer_run_uuid == "'"$last_run_uuid"'")' "./packer_manifest.json")
           iteration_id=$(echo "$build" | jq -r '.custom_data.iteration_id')
-          #echo "::set-output name=iteration_id::$iteration_id"
-          #echo "::set-output name={name}::{value}"
           echo "iteration_id=$iteration_id" >> $GITHUB_OUTPUT
           
   update-hcp-packer-channel:
