@@ -22,7 +22,7 @@ jobs:
       
     steps:
       - name: Import Secrets
-        uses: hashicorp/vault-action@v2.4.2
+        uses: hashicorp/vault-action@v2.4.3
         with:
           url: https://vault-public-vault-08c44092.b76a1ca6.z1.hashicorp.cloud:8200
           method: approle
@@ -74,7 +74,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Import Secrets
-        uses: hashicorp/vault-action@v2.4.0
+        uses: hashicorp/vault-action@v2.4.3
         with:
           url: https://vault-public-vault-08c44092.b76a1ca6.z1.hashicorp.cloud:8200
           method: approle
