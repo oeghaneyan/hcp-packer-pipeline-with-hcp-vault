@@ -1,6 +1,6 @@
 # HCP Packer Pipeline Leveraging HCP Vault for Sensitive Variables
 
-This repository documents an example workflow for integrating HCP Vault into a CI/CD pipeline that manages an HCP Packer image. The individual aspects of this approach are well documented in several sources that will be referenced throughout this repository. The goal here is to briefly cover the challenges an organization may face with image, secrets, and pipeline management, then provide an example of how these solutions can come together to address those challenges.
+This repository documents an example workflow for integrating HCP Vault into a CI/CD pipeline that manages an HCP Packer image. The individual aspects of this approach are well documented in several sources that will be referenced throughout this repository. As opposed to addressing a technical challenge, the goal here is to briefly cover the challenges an organization may face with image, secrets, and pipeline management, then provide an example of how these solutions can come together to address those challenges.
 
 ## Current Challenges 
 
@@ -49,3 +49,27 @@ The biggest changes and value with this new workflow are-
 * Securely separating out access to sensitive variables among the various teams. The infrastructure team can store image secrets like root credentials and the App team can store Database creds, but the teams would only have visibility/access to their own secrets. This removes concerns that a team may access or change variables they should not have and provides a clear path for them to manage their own secrets.  
 * Generating dynamic cloud credentials for a stronger security posture. Cloud credentials often have broad levels of access to the cloud environment, normally including the creation of new resources. In the wrong hands, those credentials can be used to spin up unwanted resources or gain access to information that can be exploited. 
 * Managed solution with baked in aspects of HA that remove the need to manually deploy or manage an Enterprise Vault cluster.
+
+## Demo
+
+This repo contains: 
+* The scripts to create an HCP Channel iteration based on the iteration id
+* The build and deploy GitHub actions workflow
+* The packer build file
+
+Prerequisites:
+* A [GitHub account](https://github.com/)
+* An [HCP account](https://portal.cloud.hashicorp.com/sign-in?utm_source=learn)
+* An [HCP Packer Registry](https://developer.hashicorp.com/packer/tutorials/hcp-get-started/hcp-push-image-metadata#create-hcp-packer-registry) and [HCP service principal](https://developer.hashicorp.com/packer/tutorials/hcp-get-started/hcp-push-image-metadata#create-hcp-service-principal-and-set-to-environment-variable)
+* An [HCP Vault Cluster](https://developer.hashicorp.com/vault/tutorials/cloud)
+* A Microsoft Azure Account
+
+To Do: 
+* Provide step-by-step guide to implement pipeline that walks the audience through setting up the custom AppRole and leverages that in the GitHub pipeline.
+
+## Documentation & Related Tutorials
+* [Create an HCP Vault Cluster](https://developer.hashicorp.com/vault/tutorials/cloud/get-started-vault)
+* [Azure Secrets Engine](https://developer.hashicorp.com/vault/tutorials/secrets-management/azure-secrets)
+* [Setup Vault AppRole](https://developer.hashicorp.com/vault/tutorials/auth-methods/approle)
+* [Automate Packer with GitHub Actions](https://developer.hashicorp.com/packer/tutorials/cloud-production/github-actions)
+
