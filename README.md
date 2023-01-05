@@ -14,9 +14,9 @@ Tools like Packer provide a codified method of building images and when that cod
 
 **Pipeline Management**- Pipelines can be complex to manage, especially at an Enterprise level. Enterprise organizations often have multiple teams working on different projects and pipelines. Managing access and permissions, as well as coordinating and collaborating across teams can be challenging. These challenges may stem from- 
 
-*Overly complex pipelines
-*Lack of communication, documentation, and/or ownership
-*Different approaches to deployment 
+* Overly complex pipelines
+* Lack of communication, documentation, and/or ownership
+* Different approaches to deployment 
     
 Simplifying access, scope, and establishing a clear framework for the pipeline can help address many of these challenges. Versatile solutions need to be implemented as a part of that framework that can meet the needs of as many teams as possible, while conforming to the governance and compliance standards an enterprise level organization sets. 
 
@@ -36,3 +36,16 @@ Some of the biggest challenges that would need to be addressed with the example 
 * Centralizing secrets management
 * Removing the need for long lived cloud credentials
 * Limiting and tracking secrets management
+
+## Solution
+
+The learn guide referenced above leverages HCP Packer, which provides a registry that allows for the management of images, tracking/identifying parent-child relationships, and also image revocation.  Layering on a centralized secrets management tool, like HCP Vault, would address some of the remaining common challenges noted. An example of what that updated workflow would look like is noted below. 
+
+![image](https://user-images.githubusercontent.com/56609570/210869977-7b9b3587-ef20-4fe8-a9fb-322f2ec694c6.png)
+
+The biggest changes and value with this new workflow are-
+* Promoting operational efficiencies by centralizing secrets management. Multiple teams no longer need access to the sensitive variables within the pipeline, they can now manage their secrets directly from Vault and the next time that pipeline is run, it pulls the new secrets. This removes the need of for them to manage a separate secrets repository, then update the pipeline with those variables. 
+* Direct integrations with the CI/CD tool to allow for machine authentication, which tracks and securely logs when and how the sensitive variables were accessed. By leveraging an AppRole within Vault, a unique identity can be created for the application that has different permissions than the teams. For example, in the above the github AppRole has access to create Dynamic Azure credentials and view the App and Infrastructure teams KV secrets, while those individual teams only have a access to their credentials. 
+* Securely separating out access to sensitive variables among the various teams. The infrastructure team can store image secrets like root credentials and the App team can store Database creds, but the teams would only have visibility/access to their own secrets. This removes concerns that a team may access or change variables they should not have and provides a clear path for them to manage their own secrets.  
+* Generating dynamic cloud credentials for a stronger security posture. Cloud credentials often have broad levels of access to the cloud environment, normally including the creation of new resources. In the wrong hands, those credentials can be used to spin up unwanted resources or gain access to information that can be exploited. 
+* Managed solution with baked in aspects of HA that remove the need to manually deploy or manage an Enterprise Vault cluster.
