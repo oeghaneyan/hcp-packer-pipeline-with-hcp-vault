@@ -30,7 +30,7 @@ Leveraging tools like Vault can help automate the secrets management processes t
 
 This learn guide provides a great reference in how to automate Packer in a pipeline and integrate with HCP Packer. This example leverages solutions to address a lot of the challenges mentioned above and works very well for individuals. The below provides a visualization of what that workflow may look like and how the teams would interact together in managing the credentials required for an image pipeline, which is where addressing the remaining challenges around secrets management becomes critical. 
 
-![image](https://user-images.githubusercontent.com/56609570/210868694-ebba1e15-d16d-4a67-8f6d-244ee3eb4a5f.png)
+![image](https://user-images.githubusercontent.com/56609570/210869213-d5c66e5e-46df-4b95-a5d6-8337775106e6.png)
 
 Some of the biggest challenges that would need to be addressed with the example workflow above include- 
 * Centralizing secrets management
