@@ -54,7 +54,8 @@ The biggest changes and value with this new workflow are-
 
 This repo contains: 
 * The scripts to create an HCP Channel iteration based on the iteration id
-* The build and deploy GitHub actions workflow
+* The "build-and-deploy" GitHub Actions workflow yaml file
+* Examples of the GitHub Actions successfully completing
 * The packer build file
 
 Prerequisites:
