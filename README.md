@@ -28,7 +28,7 @@ Simplifying access, scope, and establishing a clear framework for the pipeline c
 
 Leveraging tools like Vault can help automate the secrets management processes to help improve efficiency, while ensuring that automation does not compromise security. Vault provides the capabilities and an ability to adhere to a framework set, but it does not guarantee a strong security posture on it's own. Organizations need to continuously work to understand their potential vulnerabilities and address them.
 
-This learn guide provides a great reference in how to automate Packer in a pipeline and integrate with HCP Packer. This example leverages solutions to address a lot of the challenges mentioned above and works very well for individuals. The below provides a visualization of what that workflow may look like and how the teams would interact together in managing the credentials required for an image pipeline, which is where addressing the remaining challenges around secrets management becomes critical. 
+[This learn guide](https://developer.hashicorp.com/packer/tutorials/cloud-production/github-actions) provides a great reference in how to automate Packer in a pipeline and integrate with HCP Packer. This example leverages solutions to address a lot of the challenges mentioned above and works very well for individuals. The below provides a visualization of what that workflow may look like and how the teams would interact together in managing the credentials required for an image pipeline, which is where addressing the remaining challenges around secrets management becomes critical. 
 
 ![image](https://user-images.githubusercontent.com/56609570/210869213-d5c66e5e-46df-4b95-a5d6-8337775106e6.png)
 
