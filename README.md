@@ -73,4 +73,5 @@ To Do:
 * [Azure Secrets Engine](https://developer.hashicorp.com/vault/tutorials/secrets-management/azure-secrets)
 * [Setup Vault AppRole](https://developer.hashicorp.com/vault/tutorials/auth-methods/approle)
 * [Automate Packer with GitHub Actions](https://developer.hashicorp.com/packer/tutorials/cloud-production/github-actions)
+* [Vault GitHub Action](https://github.com/hashicorp/vault-action)
 
