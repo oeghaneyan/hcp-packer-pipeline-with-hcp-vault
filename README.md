@@ -67,6 +67,7 @@ Prerequisites:
 
 To Do: 
 * Provide step-by-step guide to implement pipeline that walks the audience through setting up the custom AppRole and leverages that in the GitHub pipeline.
+* Update to include the HCP Packer "latest" release channel
 
 ## Documentation & Related Tutorials
 * [Create an HCP Vault Cluster](https://developer.hashicorp.com/vault/tutorials/cloud/get-started-vault)
