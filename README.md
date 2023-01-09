@@ -67,8 +67,8 @@ Prerequisites:
 
 Setup:
 1. Configure the Auth Methods in the HCP Vault cluster-
-&emsp; * AppRole - For the GitHub Pipeline to authenticate to Vault
-&emsp; * Method used for user authentication, for this demo I used "Username & Password”, but most Enterprise organizations would integrate with an identity provider such as Okta. 
+ * AppRole - For the GitHub Pipeline to authenticate to Vault
+ * Method used for user authentication, for this demo I used "Username & Password”, but most Enterprise organizations would integrate with an identity provider such as Okta. 
 2. Configure the Secrets Engines in the HCP Vault cluster-
 * Key/Value - For any static credentials that may be needed. For updating the HCP Packer registry variables like the HCP Project ID, Organization ID, Client ID, and Secret ID will need to be included.
 * Azure – This will dynamically generate the Azure credentials based on a lease duration that is set. 
@@ -80,6 +80,7 @@ Setup:
 5. Copy the contents of this repository and modify as needed. 
 
 Example: 
+
 Under the secrets of this repository the only variables that are stored are the AppRole Role ID and Secret ID-
 ![image](https://user-images.githubusercontent.com/56609570/211422776-90c0bf96-7475-451f-867a-b94e3b3b90f3.png)
 
