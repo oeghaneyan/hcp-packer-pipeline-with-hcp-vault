@@ -66,19 +66,27 @@ Prerequisites:
 * A Microsoft Azure Account
 
 Setup:
-1. Configure the Auth Methods in the HCP Vault cluster. 
-* AppRole - For the GitHub Pipeline to authenticate to Vault
-* Method used for user authentication, for this demo I used "Username & Password”, but most Enterprise organizations would integrate with an identity provider such as Okta. 
-2. Configure the Secrets Engines in the HCP Vault cluster. 
-* Key/Value - For any static credentials that may be needed. For updating the HCP Packer registry variables like the HCP Project ID, Organization ID, Client ID, and Secret ID will need to be included.
-* Azure – This will dynamically generate the Azure credentials based on a lease duration that is set. 
+1. Configure the Auth Methods in the HCP Vault cluster-
+&emsp;* AppRole - For the GitHub Pipeline to authenticate to Vault
+&emsp;* Method used for user authentication, for this demo I used "Username & Password”, but most Enterprise organizations would integrate with an identity provider such as Okta. 
+2. Configure the Secrets Engines in the HCP Vault cluster-
+&emsp;* Key/Value - For any static credentials that may be needed. For updating the HCP Packer registry variables like the HCP Project ID, Organization ID, Client ID, and Secret ID will need to be included.
+&emsp;* Azure – This will dynamically generate the Azure credentials based on a lease duration that is set. 
 3. Configure 3 policies in the HCP Vault cluster-
-* Policy for an App team that can have Read/Write access to any KV secrets. This will include their user group and the KV paths they may need access to (i.e. image credentials, HCP service principal, etc). 
-* Similar to the App team policy, a separate policy for an Infrastructure team to access any KV secrets they may have (i.e. database credentials, API tokens, etc).
-* An AppRole that has read capabilities to the paths for the Azure credentials and the KV paths for both teams. 
+&emsp;* Policy for an App team that can have Read/Write access to any KV secrets. This will include their user group and the KV paths they may need access to (i.e. image credentials, HCP service principal, etc). 
+&emsp;* Similar to the App team policy, a separate policy for an Infrastructure team to access any KV secrets they may have (i.e. database credentials, API tokens, etc).
+&emsp;* An AppRole that has read capabilities to the paths for the Azure credentials and the KV paths for both teams. 
 4. Enter the AppRole Role ID and Secret ID as sensitive variables in the GitHub repository. 
 5. Copy the contents of this repository and modify as needed. 
 
+Example: 
+Under the secrets of this repository the only variables that are stored are the AppRole Role ID and Secret ID-
+![image](https://user-images.githubusercontent.com/56609570/211422776-90c0bf96-7475-451f-867a-b94e3b3b90f3.png)
+
+The remaining sensitive variables needed are pulled from Vault-
+![image](https://user-images.githubusercontent.com/56609570/211422797-8bdc0a86-d4d3-4efd-a433-99d385b8bc2e.png)
+
+This simplifies the pipleines operations leveraging a single source to store and manage secrets. 
 
 To Do: 
 * Provide step-by-step guide to implement pipeline that walks the audience through setting up the custom AppRole and leverages that in the GitHub pipeline.
