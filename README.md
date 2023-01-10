@@ -35,7 +35,7 @@ Leveraging tools like Vault can help automate the secrets management processes t
 Some of the biggest challenges that would need to be addressed with the example workflow above include- 
 * Centralizing secrets management
 * Removing the need for long lived cloud credentials
-* Limiting and tracking secrets management
+* Limited visibility and controls around secrets rotation 
 
 ## Solution
 
