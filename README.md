@@ -89,8 +89,9 @@ The remaining sensitive variables needed are pulled from Vault-
 
 This simplifies the pipleines operations leveraging a single source to store and manage secrets. 
 
-To Do: 
-* Provide step-by-step guide to implement pipeline that walks the audience through setting up the custom AppRole and leverages that in the GitHub pipeline.
+Future Updates: 
+* Leverage [OIDC for GitHub Actions workflows](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-hashicorp-vault) to authenticate with a HashiCorp Vault to retrieve secrets. This would be a different and more secure alternative to AppRole authentication. 
+* Migrate from Packer script to Packer TF 
 * Update to include the HCP Packer "latest" release channel
 
 ## Documentation & Related Tutorials
