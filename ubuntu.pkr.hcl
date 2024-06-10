@@ -1,3 +1,12 @@
+# Set Packer Azure Plugin
+packer {
+  required_plugins {
+    azure = {
+      source  = "github.com/hashicorp/azure"
+      version = "~> 2"
+    }
+  }
+}
 
 # Time stamps for image file placed into Cloud
 locals {
